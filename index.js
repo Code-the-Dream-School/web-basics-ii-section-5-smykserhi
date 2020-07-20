@@ -28,9 +28,10 @@ const name_player2 = document.getElementById('name_player2');
 const ships_player1 = document.getElementById('ships_player1');
 const ships_player2 = document.getElementById('ships_player2');
 const button = document.getElementById('buttons')
+
 name_player1.textContent = player1.name
 name_player2.textContent = player2.name
-turnNow.textContent = player1.name; // current player name
+turnNow.textContent = player2.name; // current player name
 let activeBoard = 'board_player1';// Represent which player making fire
 //***** */
 //// Function which crete board on a page
@@ -41,7 +42,7 @@ function boardCreation(player, playerPath){
     for (var y = 0; y < 4; y++) {
       const cell = document.createElement('div');
       cell.className = "square"; // adding css properties to make it looks like a square
-      cell.textContent = `${x},${y} , ${player.board[x][y]}`;  // saves the coordinates as a string value 'x,y'
+      cell.textContent = `${x},${y} `;  // saves the coordinates as a string value 'x,y'
       cell.value = player.board[x][y];//state of the cell
       //this function adds the click event to each cell
       cell.addEventListener( 'click', (e) => {
@@ -50,10 +51,10 @@ function boardCreation(player, playerPath){
           function switchPlayers() {//function switch active player
             if(activeBoard === 'board_player1'){
               activeBoard = 'board_player2'
-              turnNow.textContent = player2.name;
+              turnNow.textContent = player1.name;
             }else if(activeBoard === 'board_player2'){
               activeBoard = 'board_player1'
-              turnNow.textContent = player1.name;
+              turnNow.textContent = player2.name;
             }     
           }
           //console.log( cell.value) //display the coordinates in the console
@@ -67,7 +68,9 @@ function boardCreation(player, playerPath){
              ships_player1.textContent = player1.boats //update lives on display
              ships_player2.textContent = player2.boats
              if(player.boats === 0){
-               gameOwer(player)
+               if(player === player1) gameOwer(player2)
+               else gameOwer(player1)
+               
              }
           }                   
       });
@@ -109,6 +112,7 @@ function addButtons() {
   let resetButton = document.createElement("BUTTON"); // create new buttons
   let newGameButton = document.createElement('BUTTON')
   resetButton.innerHTML = "reset"
+  resetButton.style.marginRight = '5px'
   newGameButton.textContent = "New Game"
   button.appendChild(resetButton)
   button.appendChild(newGameButton)
