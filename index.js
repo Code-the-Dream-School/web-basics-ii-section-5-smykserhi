@@ -132,7 +132,7 @@ function resetGame(){
   boardCreation(player2, board_player2);
   ships_player1.textContent = player1.boats // update lives numbers to 4
   ships_player2.textContent = player2.boats
-  turnNow.textContent = player1.name; //set up curent player
+  turnNow.textContent = player2.name; //set up curent player
   activeBoard = 'board_player1';// Represent which player making fire
   
 }
